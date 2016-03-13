@@ -13,18 +13,26 @@ module SpreeI18n
         # supported locales defined by SpreeI18n::Config.supported_locales can
         # actually be set
         def set_user_language
-          I18n.locale = if session.key?(:locale) && Config.supported_locales.include?(session[:locale].to_sym)
-            session[:locale]
-          elsif respond_to?(:config_locale, true) && !config_locale.blank?
-            config_locale
+          if spree_current_user && Config.supported_locales.include?(spree_current_user.language.to_sym)
+            if params[:language] && Config.supported_locales.include?(params[:language].to_sym)
+              spree_current_user.update_attribute(:language, params[:language])
+            end
+            I18n.locale = spree_current_user.language.to_sym
           else
-            Rails.application.config.i18n.default_locale || I18n.default_locale
+            I18n.locale = if params[:locale] && Config.supported_locales.include?(params[:locale].to_sym)
+              params[:locale]
+            elsif respond_to?(:config_locale, true) && !config_locale.blank?
+              config_locale
+            else
+              Rails.application.config.i18n.default_locale || I18n.default_locale
+            end   
           end
         end
 
         def globalize_fallbacks
           Fallbacks.config!
         end
+
     end
   end
 end

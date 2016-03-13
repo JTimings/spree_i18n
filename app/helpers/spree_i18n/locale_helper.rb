@@ -17,7 +17,7 @@ module SpreeI18n
     end
 
     def available_locales_options
-      Config.available_locales.map { |locale| locale_presentation(locale) }
+      Config.available_locales.map { |locale| locale_presentation(locale, false) }
     end
 
     # Need to manually add en to the array because the en.yml was moved from
