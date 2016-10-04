@@ -10,4 +10,9 @@
     <label for="available_locales_"><%= Spree.t(:'i18n.available_locales') %></label>
     <%= select_available_locales %>
   </div>
+
+  <div class="field">
+  	<%= label_tag :local_locale, Spree.t(:'i18n.local_locale') %><br />
+  	<%= select_local_locale %>
+	</div>
 </fieldset>

@@ -8,6 +8,10 @@ module SpreeI18n
       select_tag('available_locales[]', options_for_select(all_locales_options, Config.available_locales), common_options)
     end
 
+    def select_local_locale
+      select_tag(:local_locale, options_for_select(available_locales_options, Spree::Config[:local_locale]), :class => 'select2 fullwidth')
+    end
+
     def select_available_locales_fields
       select_tag('locale', options_for_select(available_locales_options, Config.available_locales), common_options)
     end

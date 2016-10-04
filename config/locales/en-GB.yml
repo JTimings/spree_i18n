@@ -557,6 +557,7 @@ en-GB:
     home: Home
     i18n:
       available_locales: Available Locales
+      local_locale: Local Language
       fields: Fields
       language: Language
       localization_settings: Localisation Settings
